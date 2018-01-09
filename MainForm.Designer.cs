@@ -50,7 +50,7 @@
             this.imageBoxFrameGrabber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.imageBoxFrameGrabber.Location = new System.Drawing.Point(12, 12);
             this.imageBoxFrameGrabber.Name = "imageBoxFrameGrabber";
-            this.imageBoxFrameGrabber.Size = new System.Drawing.Size(640, 480);
+            this.imageBoxFrameGrabber.Size = new System.Drawing.Size(320, 240);
             this.imageBoxFrameGrabber.TabIndex = 4;
             this.imageBoxFrameGrabber.TabStop = false;
             // 

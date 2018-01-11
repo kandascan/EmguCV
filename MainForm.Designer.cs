@@ -31,7 +31,10 @@
             this.components = new System.ComponentModel.Container();
             this.button1 = new System.Windows.Forms.Button();
             this.imageBoxFrameGrabber = new Emgu.CV.UI.ImageBox();
+            this.btnTakePhoto = new System.Windows.Forms.Button();
+            this.imageBoxPreview = new Emgu.CV.UI.ImageBox();
             ((System.ComponentModel.ISupportInitialize)(this.imageBoxFrameGrabber)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageBoxPreview)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -48,22 +51,44 @@
             // imageBoxFrameGrabber
             // 
             this.imageBoxFrameGrabber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.imageBoxFrameGrabber.Location = new System.Drawing.Point(12, 12);
+            this.imageBoxFrameGrabber.Location = new System.Drawing.Point(42, 77);
             this.imageBoxFrameGrabber.Name = "imageBoxFrameGrabber";
             this.imageBoxFrameGrabber.Size = new System.Drawing.Size(320, 240);
             this.imageBoxFrameGrabber.TabIndex = 4;
             this.imageBoxFrameGrabber.TabStop = false;
+            // 
+            // btnTakePhoto
+            // 
+            this.btnTakePhoto.Location = new System.Drawing.Point(460, 217);
+            this.btnTakePhoto.Name = "btnTakePhoto";
+            this.btnTakePhoto.Size = new System.Drawing.Size(100, 41);
+            this.btnTakePhoto.TabIndex = 5;
+            this.btnTakePhoto.Text = "Take photo";
+            this.btnTakePhoto.UseVisualStyleBackColor = true;
+            this.btnTakePhoto.Click += new System.EventHandler(this.btnTakePhoto_Click);
+            // 
+            // imageBoxPreview
+            // 
+            this.imageBoxPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.imageBoxPreview.Location = new System.Drawing.Point(460, 77);
+            this.imageBoxPreview.Name = "imageBoxPreview";
+            this.imageBoxPreview.Size = new System.Drawing.Size(100, 100);
+            this.imageBoxPreview.TabIndex = 7;
+            this.imageBoxPreview.TabStop = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(663, 616);
+            this.Controls.Add(this.imageBoxPreview);
+            this.Controls.Add(this.btnTakePhoto);
             this.Controls.Add(this.imageBoxFrameGrabber);
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "EmguCV";
             ((System.ComponentModel.ISupportInitialize)(this.imageBoxFrameGrabber)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageBoxPreview)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -71,6 +96,8 @@
         #endregion
         private Emgu.CV.UI.ImageBox imageBoxFrameGrabber;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnTakePhoto;
+        private Emgu.CV.UI.ImageBox imageBoxPreview;
     }
 }
 

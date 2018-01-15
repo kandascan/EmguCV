@@ -33,6 +33,8 @@
             this.imageBoxFrameGrabber = new Emgu.CV.UI.ImageBox();
             this.btnTakePhoto = new System.Windows.Forms.Button();
             this.imageBoxPreview = new Emgu.CV.UI.ImageBox();
+            this.txtPersonName = new System.Windows.Forms.TextBox();
+            this.lblPersonName = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.imageBoxFrameGrabber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageBoxPreview)).BeginInit();
             this.SuspendLayout();
@@ -59,7 +61,7 @@
             // 
             // btnTakePhoto
             // 
-            this.btnTakePhoto.Location = new System.Drawing.Point(460, 217);
+            this.btnTakePhoto.Location = new System.Drawing.Point(460, 248);
             this.btnTakePhoto.Name = "btnTakePhoto";
             this.btnTakePhoto.Size = new System.Drawing.Size(100, 41);
             this.btnTakePhoto.TabIndex = 5;
@@ -76,11 +78,29 @@
             this.imageBoxPreview.TabIndex = 7;
             this.imageBoxPreview.TabStop = false;
             // 
+            // txtPersonName
+            // 
+            this.txtPersonName.Location = new System.Drawing.Point(460, 206);
+            this.txtPersonName.Name = "txtPersonName";
+            this.txtPersonName.Size = new System.Drawing.Size(100, 20);
+            this.txtPersonName.TabIndex = 8;
+            // 
+            // lblPersonName
+            // 
+            this.lblPersonName.AutoSize = true;
+            this.lblPersonName.Location = new System.Drawing.Point(457, 190);
+            this.lblPersonName.Name = "lblPersonName";
+            this.lblPersonName.Size = new System.Drawing.Size(58, 13);
+            this.lblPersonName.TabIndex = 9;
+            this.lblPersonName.Text = "Your name";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(663, 616);
+            this.Controls.Add(this.lblPersonName);
+            this.Controls.Add(this.txtPersonName);
             this.Controls.Add(this.imageBoxPreview);
             this.Controls.Add(this.btnTakePhoto);
             this.Controls.Add(this.imageBoxFrameGrabber);
@@ -90,6 +110,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.imageBoxFrameGrabber)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageBoxPreview)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -98,6 +119,8 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnTakePhoto;
         private Emgu.CV.UI.ImageBox imageBoxPreview;
+        private System.Windows.Forms.TextBox txtPersonName;
+        private System.Windows.Forms.Label lblPersonName;
     }
 }
 

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 using Emgu.CV;
 using Emgu.CV.Structure;
@@ -15,6 +17,8 @@ namespace EmguCV
         private HaarCascade face;
         private Image<Gray, byte> result;
         private Image<Gray, byte> TrainedFace;
+        List<Image<Gray, byte>> trainingImages = new List<Image<Gray, byte>>();
+        List<string> personNames = new List<string>();
 
         public Form1()
         {
@@ -51,23 +55,41 @@ namespace EmguCV
 
         private void btnTakePhoto_Click(object sender, EventArgs e)
         {
-            gray = grabber.QueryGrayFrame().Resize(320, 240, INTER.CV_INTER_CUBIC);
-
-            MCvAvgComp[][] facesDetected = gray.DetectHaarCascade(
-                face,
-                1.2,
-                10,
-                HAAR_DETECTION_TYPE.DO_CANNY_PRUNING,
-                new Size(20, 20));
-
-            foreach (MCvAvgComp f in facesDetected[0])
+            try
             {
-                TrainedFace = currentFrame.Copy(f.rect).Convert<Gray, byte>();
-                break;
-            }
+                gray = grabber.QueryGrayFrame().Resize(320, 240, INTER.CV_INTER_CUBIC);
 
-            TrainedFace = result.Resize(100, 100, INTER.CV_INTER_CUBIC);
-            imageBoxPreview.Image = TrainedFace;
+                MCvAvgComp[][] facesDetected = gray.DetectHaarCascade(
+                    face,
+                    1.2,
+                    10,
+                    HAAR_DETECTION_TYPE.DO_CANNY_PRUNING,
+                    new Size(20, 20));
+
+                foreach (MCvAvgComp f in facesDetected[0])
+                {
+                    TrainedFace = currentFrame.Copy(f.rect).Convert<Gray, byte>();
+                    break;
+                }
+
+                TrainedFace = result.Resize(100, 100, INTER.CV_INTER_CUBIC);
+                imageBoxPreview.Image = TrainedFace;
+
+                trainingImages.Add(TrainedFace);
+                personNames.Add(txtPersonName.Text);
+
+                File.WriteAllText(Application.StartupPath + "/TrainedFaces/TrainedLabels.txt", trainingImages.ToArray().Length + ",");
+
+                for (int i = 1; i < trainingImages.ToArray().Length + 1; i++)
+                {
+                    trainingImages.ToArray()[i - 1].Save(Application.StartupPath + "/TrainedFaces/face" + i + ".bmp");
+                    File.AppendAllText(Application.StartupPath + "/TrainedFaces/TrainedLabels.txt", personNames.ToArray()[i - 1] + ",");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

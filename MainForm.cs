@@ -16,7 +16,6 @@ namespace EmguCV
         private Image<Gray, byte> gray;
         private HaarCascade face;
         private Image<Gray, byte> result;
-        private Image<Gray, byte> TrainedFace;
         List<Image<Gray, byte>> trainingImages = new List<Image<Gray, byte>>();
         List<string> personNames = new List<string>();
 
@@ -67,7 +66,6 @@ namespace EmguCV
 
             try
             {
-
                 trainingImages.Add(result);
                 personNames.Add(txtPersonName.Text);
 

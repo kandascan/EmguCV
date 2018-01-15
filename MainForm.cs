@@ -23,6 +23,7 @@ namespace EmguCV
         public Form1()
         {
             InitializeComponent();
+            btnTakePhoto.Enabled = false;
             face = new HaarCascade("haarcascade_frontalface_default.xml");
         }
 
@@ -31,6 +32,7 @@ namespace EmguCV
             grabber = new Capture();
             grabber.QueryFrame();
             Application.Idle += FrameGrabber;
+            btnTakePhoto.Enabled = true;
         }
 
         void FrameGrabber(object sender, EventArgs e)
@@ -51,31 +53,22 @@ namespace EmguCV
                 currentFrame.Draw(f.rect, new Bgr(Color.Yellow), 1);
             }
             imageBoxFrameGrabber.Image = currentFrame;
+
+            imageBoxPreview.Image = result;
         } 
 
         private void btnTakePhoto_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(txtPersonName.Text))
+            {
+                lblInfo.Text = "You must provide person name";
+                return;
+            }
+
             try
             {
-                gray = grabber.QueryGrayFrame().Resize(320, 240, INTER.CV_INTER_CUBIC);
 
-                MCvAvgComp[][] facesDetected = gray.DetectHaarCascade(
-                    face,
-                    1.2,
-                    10,
-                    HAAR_DETECTION_TYPE.DO_CANNY_PRUNING,
-                    new Size(20, 20));
-
-                foreach (MCvAvgComp f in facesDetected[0])
-                {
-                    TrainedFace = currentFrame.Copy(f.rect).Convert<Gray, byte>();
-                    break;
-                }
-
-                TrainedFace = result.Resize(100, 100, INTER.CV_INTER_CUBIC);
-                imageBoxPreview.Image = TrainedFace;
-
-                trainingImages.Add(TrainedFace);
+                trainingImages.Add(result);
                 personNames.Add(txtPersonName.Text);
 
                 File.WriteAllText(Application.StartupPath + "/TrainedFaces/TrainedLabels.txt", trainingImages.ToArray().Length + ",");
@@ -85,6 +78,8 @@ namespace EmguCV
                     trainingImages.ToArray()[i - 1].Save(Application.StartupPath + "/TrainedFaces/face" + i + ".bmp");
                     File.AppendAllText(Application.StartupPath + "/TrainedFaces/TrainedLabels.txt", personNames.ToArray()[i - 1] + ",");
                 }
+                lblInfo.Text = $"{txtPersonName.Text} face saved";
+
             }
             catch (Exception ex)
             {

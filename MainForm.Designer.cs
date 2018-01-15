@@ -35,6 +35,7 @@
             this.imageBoxPreview = new Emgu.CV.UI.ImageBox();
             this.txtPersonName = new System.Windows.Forms.TextBox();
             this.lblPersonName = new System.Windows.Forms.Label();
+            this.lblInfo = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.imageBoxFrameGrabber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageBoxPreview)).BeginInit();
             this.SuspendLayout();
@@ -94,11 +95,21 @@
             this.lblPersonName.TabIndex = 9;
             this.lblPersonName.Text = "Your name";
             // 
+            // lblInfo
+            // 
+            this.lblInfo.AutoSize = true;
+            this.lblInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 18.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInfo.Location = new System.Drawing.Point(210, 22);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(0, 29);
+            this.lblInfo.TabIndex = 10;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(663, 616);
+            this.Controls.Add(this.lblInfo);
             this.Controls.Add(this.lblPersonName);
             this.Controls.Add(this.txtPersonName);
             this.Controls.Add(this.imageBoxPreview);
@@ -121,6 +132,7 @@
         private Emgu.CV.UI.ImageBox imageBoxPreview;
         private System.Windows.Forms.TextBox txtPersonName;
         private System.Windows.Forms.Label lblPersonName;
+        private System.Windows.Forms.Label lblInfo;
     }
 }
 

@@ -71,11 +71,27 @@ namespace EmguCV
 
             foreach (MCvAvgComp f in facesDetected[0])
             {
+                string personName = String.Empty;
+                var font = new MCvFont(FONT.CV_FONT_HERSHEY_TRIPLEX, 0.5d, 0.5d);
+
                 result = currentFrame.Copy(f.rect).Convert<Gray, byte>().Resize(100, 100, INTER.CV_INTER_CUBIC);
-                currentFrame.Draw(f.rect, new Bgr(Color.Yellow), 1);
+                currentFrame.Draw(f.rect, new Bgr(Color.LightGreen), 1);
+
+                if (trainingImages.ToArray().Length != 0)
+                {
+                    MCvTermCriteria termCrit = new MCvTermCriteria(ContTrain, 0.001);
+
+                    EigenObjectRecognizer recognizer = new EigenObjectRecognizer(
+                        trainingImages.ToArray(),
+                        personNames.ToArray(),
+                        3000,
+                        ref termCrit);
+
+                    personName = recognizer.Recognize(result);
+                    currentFrame.Draw(personName, ref font, new Point(f.rect.X - 2, f.rect.Y - 2), new Bgr(Color.LightGreen));
+                }
             }
             imageBoxFrameGrabber.Image = currentFrame;
-
             imageBoxPreview.Image = result;
         }
 

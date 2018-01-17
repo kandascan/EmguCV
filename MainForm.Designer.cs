@@ -36,6 +36,7 @@
             this.txtPersonName = new System.Windows.Forms.TextBox();
             this.lblPersonName = new System.Windows.Forms.Label();
             this.lblInfo = new System.Windows.Forms.Label();
+            this.lblFaceDetected = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.imageBoxFrameGrabber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageBoxPreview)).BeginInit();
             this.SuspendLayout();
@@ -43,7 +44,7 @@
             // button1
             // 
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.button1.Location = new System.Drawing.Point(283, 531);
+            this.button1.Location = new System.Drawing.Point(392, 229);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(110, 53);
             this.button1.TabIndex = 2;
@@ -54,7 +55,7 @@
             // imageBoxFrameGrabber
             // 
             this.imageBoxFrameGrabber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.imageBoxFrameGrabber.Location = new System.Drawing.Point(42, 77);
+            this.imageBoxFrameGrabber.Location = new System.Drawing.Point(21, 42);
             this.imageBoxFrameGrabber.Name = "imageBoxFrameGrabber";
             this.imageBoxFrameGrabber.Size = new System.Drawing.Size(320, 240);
             this.imageBoxFrameGrabber.TabIndex = 4;
@@ -62,7 +63,7 @@
             // 
             // btnTakePhoto
             // 
-            this.btnTakePhoto.Location = new System.Drawing.Point(460, 248);
+            this.btnTakePhoto.Location = new System.Drawing.Point(532, 125);
             this.btnTakePhoto.Name = "btnTakePhoto";
             this.btnTakePhoto.Size = new System.Drawing.Size(100, 41);
             this.btnTakePhoto.TabIndex = 5;
@@ -73,7 +74,7 @@
             // imageBoxPreview
             // 
             this.imageBoxPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.imageBoxPreview.Location = new System.Drawing.Point(460, 77);
+            this.imageBoxPreview.Location = new System.Drawing.Point(392, 66);
             this.imageBoxPreview.Name = "imageBoxPreview";
             this.imageBoxPreview.Size = new System.Drawing.Size(100, 100);
             this.imageBoxPreview.TabIndex = 7;
@@ -81,7 +82,7 @@
             // 
             // txtPersonName
             // 
-            this.txtPersonName.Location = new System.Drawing.Point(460, 206);
+            this.txtPersonName.Location = new System.Drawing.Point(532, 66);
             this.txtPersonName.Name = "txtPersonName";
             this.txtPersonName.Size = new System.Drawing.Size(100, 20);
             this.txtPersonName.TabIndex = 8;
@@ -89,7 +90,7 @@
             // lblPersonName
             // 
             this.lblPersonName.AutoSize = true;
-            this.lblPersonName.Location = new System.Drawing.Point(457, 190);
+            this.lblPersonName.Location = new System.Drawing.Point(529, 38);
             this.lblPersonName.Name = "lblPersonName";
             this.lblPersonName.Size = new System.Drawing.Size(58, 13);
             this.lblPersonName.TabIndex = 9;
@@ -98,17 +99,28 @@
             // lblInfo
             // 
             this.lblInfo.AutoSize = true;
-            this.lblInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 18.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInfo.Location = new System.Drawing.Point(210, 22);
+            this.lblInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInfo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.lblInfo.Location = new System.Drawing.Point(16, 14);
             this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(0, 29);
+            this.lblInfo.Size = new System.Drawing.Size(0, 25);
             this.lblInfo.TabIndex = 10;
+            // 
+            // lblFaceDetected
+            // 
+            this.lblFaceDetected.AutoSize = true;
+            this.lblFaceDetected.Location = new System.Drawing.Point(389, 38);
+            this.lblFaceDetected.Name = "lblFaceDetected";
+            this.lblFaceDetected.Size = new System.Drawing.Size(76, 13);
+            this.lblFaceDetected.TabIndex = 11;
+            this.lblFaceDetected.Text = "Face detected";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(663, 616);
+            this.ClientSize = new System.Drawing.Size(668, 314);
+            this.Controls.Add(this.lblFaceDetected);
             this.Controls.Add(this.lblInfo);
             this.Controls.Add(this.lblPersonName);
             this.Controls.Add(this.txtPersonName);
@@ -133,6 +145,7 @@
         private System.Windows.Forms.TextBox txtPersonName;
         private System.Windows.Forms.Label lblPersonName;
         private System.Windows.Forms.Label lblInfo;
+        private System.Windows.Forms.Label lblFaceDetected;
     }
 }
 

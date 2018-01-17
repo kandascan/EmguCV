@@ -16,14 +16,37 @@ namespace EmguCV
         private Image<Gray, byte> gray;
         private HaarCascade face;
         private Image<Gray, byte> result;
+        private Image<Gray, byte> TrainedFace;
         List<Image<Gray, byte>> trainingImages = new List<Image<Gray, byte>>();
         List<string> personNames = new List<string>();
+        int ContTrain;
 
         public Form1()
         {
             InitializeComponent();
             btnTakePhoto.Enabled = false;
             face = new HaarCascade("haarcascade_frontalface_default.xml");
+
+            try
+            {
+                string personInfo = File.ReadAllText(Application.StartupPath + "/TrainedFaces/TrainedLabels.txt");
+                string[] Labels = personInfo.Split(',');
+                ContTrain = Convert.ToInt16(Labels[0]);
+                string loadFace;
+
+                for (int tf = 1; tf < ContTrain + 1; tf++)
+                {
+                    loadFace = "face" + tf + ".bmp";
+                    trainingImages.Add(new Image<Gray, byte>(Application.StartupPath + "/TrainedFaces/" + loadFace));
+                    personNames.Add(Labels[tf]);
+                }
+                lblInfo.Text = $"Total faces saved in hard drive: {ContTrain}";
+
+            }
+            catch (Exception e)
+            {
+                lblInfo.Text = "There is no saved faces";
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -54,7 +77,7 @@ namespace EmguCV
             imageBoxFrameGrabber.Image = currentFrame;
 
             imageBoxPreview.Image = result;
-        } 
+        }
 
         private void btnTakePhoto_Click(object sender, EventArgs e)
         {
@@ -66,6 +89,8 @@ namespace EmguCV
 
             try
             {
+                ContTrain += 1;
+
                 trainingImages.Add(result);
                 personNames.Add(txtPersonName.Text);
 

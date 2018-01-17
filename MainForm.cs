@@ -11,9 +11,7 @@ namespace EmguCV
 {
     public partial class Form1 : Form
     {
-        private Image<Bgr, Byte> currentFrame;
         private Capture grabber;
-        private Image<Gray, byte> gray;
         private HaarCascade face;
         private Image<Gray, byte> result;
         private Image<Gray, byte> TrainedFace;
@@ -59,6 +57,9 @@ namespace EmguCV
 
         void FrameGrabber(object sender, EventArgs e)
         {
+            Image<Gray, byte> gray;
+            Image<Bgr, Byte> currentFrame;
+
             currentFrame = grabber.QueryFrame().Resize(320, 240, INTER.CV_INTER_CUBIC);
             gray = currentFrame.Convert<Gray, Byte>();
 
@@ -77,7 +78,7 @@ namespace EmguCV
                 result = currentFrame.Copy(f.rect).Convert<Gray, byte>().Resize(100, 100, INTER.CV_INTER_CUBIC);
                 currentFrame.Draw(f.rect, new Bgr(Color.LightGreen), 1);
 
-                if (trainingImages.ToArray().Length != 0)
+                if (trainingImages.Count != 0)
                 {
                     MCvTermCriteria termCrit = new MCvTermCriteria(ContTrain, 0.001);
 
@@ -106,16 +107,15 @@ namespace EmguCV
             try
             {
                 ContTrain += 1;
-
                 trainingImages.Add(result);
                 personNames.Add(txtPersonName.Text);
 
-                File.WriteAllText(Application.StartupPath + "/TrainedFaces/TrainedLabels.txt", trainingImages.ToArray().Length + ",");
+                File.WriteAllText(Application.StartupPath + "/TrainedFaces/TrainedLabels.txt", trainingImages.Count + ",");
 
                 for (int i = 1; i < trainingImages.ToArray().Length + 1; i++)
                 {
                     trainingImages.ToArray()[i - 1].Save(Application.StartupPath + "/TrainedFaces/face" + i + ".bmp");
-                    File.AppendAllText(Application.StartupPath + "/TrainedFaces/TrainedLabels.txt", personNames.ToArray()[i - 1] + ",");
+                    File.AppendAllText(Application.StartupPath + "/TrainedFaces/TrainedLabels.txt", personNames[i - 1] + ",");
                 }
                 lblInfo.Text = $"{txtPersonName.Text} face saved";
 

@@ -15,9 +15,10 @@ namespace EmguCV
         private HaarCascade face;
         private Image<Gray, byte> result;
         private Image<Gray, byte> TrainedFace;
-        List<Image<Gray, byte>> trainingImages = new List<Image<Gray, byte>>();
-        List<string> personNames = new List<string>();
-        int ContTrain;
+        private List<Image<Gray, byte>> trainingImages = new List<Image<Gray, byte>>();
+        private List<string> personNames = new List<string>();
+        private int ContTrain;
+        private bool CameraOn;
 
         public Form1()
         {
@@ -49,10 +50,28 @@ namespace EmguCV
 
         private void button1_Click(object sender, EventArgs e)
         {
-            grabber = new Capture();
-            grabber.QueryFrame();
-            Application.Idle += FrameGrabber;
-            btnTakePhoto.Enabled = true;
+            if (CameraOn)
+            {
+                Application.Idle -= FrameGrabber;
+                grabber.Dispose();
+                button1.Text = "Turn on camera";
+                CameraOn = false;
+                btnTakePhoto.Enabled = false;
+                imageBoxPreview.Image = null;
+                imageBoxFrameGrabber.Image = null;
+                txtPersonName.Text = String.Empty;
+                lblInfo.Text = "Turn on camera to proceed";
+            }
+            else
+            {
+                grabber = new Capture();
+                grabber.QueryFrame();
+                Application.Idle += FrameGrabber;
+                btnTakePhoto.Enabled = true;
+                button1.Text = "Turn off camera";
+                CameraOn = true;
+                lblInfo.Text = String.Empty;
+            }
         }
 
         void FrameGrabber(object sender, EventArgs e)
